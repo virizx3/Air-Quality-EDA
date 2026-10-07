@@ -4,8 +4,8 @@ import plotly.express as px
 
 st.set_page_config(page_title="Data Explorer", layout="wide")
 st.image(
-    r"C:\Users\techno\Desktop\MIDTERM\air quality.jpg",
-    use_container_width=True
+    "air quality.jpg",
+    width="stretch"
 )
 html= st.markdown("""
 <div style="text-align: center; color: blue;">
