@@ -13,7 +13,9 @@ html= st.markdown("""
 </div>
 """, unsafe_allow_html=True)
 
+st.title("Air Quality Analysis")
 
+st.markdown("**Prepared by: Farid Ahmed Ebrahim**")
 
 
 df = pd.read_parquet("Air_Quality_Cleaned.parquet")
@@ -89,7 +91,7 @@ with col2:
 
     st.plotly_chart(
         fig_num,
-        use_container_width=True
+        use_container_width="stretch"
     )
 
 

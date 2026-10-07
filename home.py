@@ -4,18 +4,24 @@ import pandas as pd
 st.set_page_config(page_title="home", layout="wide")
 st.image(
     r"C:\Users\techno\Desktop\MIDTERM\air quality.jpg",
-    use_container_width=True
+    use_container_width="stretch"
 )
 html= st.markdown("""
 <div style="text-align: center; color: blue;">
    Air Quality Data and Analysis project 
 </div>
 """, unsafe_allow_html=True)
+st.markdown("**Prepared by: Farid Ahmed Ebrahim**")
+
 df = pd.read_parquet("Air_Quality_Cleaned.parquet")
 st.subheader("Data Overview")
 st.dataframe(df.head(10))
+
 #sata description
 st.subheader("Data Description")
+
+st.title("Air Quality Analysis")
+
 
 description_df = pd.DataFrame({
     "Column Name": [

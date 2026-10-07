@@ -13,6 +13,8 @@ html= st.markdown("""
    Air Quality Data and Analysis project 
 </div>
 """, unsafe_allow_html=True)
+st.markdown("**Prepared by: Farid Ahmed Ebrahim**")
+
 #load the data
 
 df = pd.read_parquet("Air_Quality_Cleaned.parquet")
@@ -43,7 +45,7 @@ q1 = pm25.groupby("Geo Type Name")["Data Value"].agg(
     ["count", "mean", "median", "min", "max"]
 ).round(2)
 
-st.dataframe(q1, use_container_width=True)
+st.dataframe(q1, use_container_width="stretch")
 
 fig1 = px.box(
     pm25,
