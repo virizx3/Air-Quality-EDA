@@ -6,7 +6,6 @@ st.image(
     "air quality.jpg",
     width=400
 )
-)
 html= st.markdown("""
 <div style="text-align: center; color: blue;">
    Air Quality Data and Analysis project 
