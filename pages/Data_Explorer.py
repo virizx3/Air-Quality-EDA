@@ -9,7 +9,7 @@ st.image(
 )
 html= st.markdown("""
 <div style="text-align: center; color: blue;">
-   Air Quality Data and Analysis project 
+   Air Quality Data  Analysis project 
 </div>
 """, unsafe_allow_html=True)
 
