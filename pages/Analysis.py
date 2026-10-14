@@ -37,8 +37,9 @@ st.subheader("Data Analysis")
 # Question 1
 # --------------------------------------------------
 
-st.header("Question 1: How do PM2.5 values vary across different geographic types?")
-
+st.header(
+    "Question 1: How does average PM2.5 differ across geographic types?"
+)
 pm25 = df[df["Name"] == "Fine particles (PM 2.5)"]
 
 q1 = pm25.groupby("Geo Type Name")["Data Value"].agg(
@@ -47,14 +48,56 @@ q1 = pm25.groupby("Geo Type Name")["Data Value"].agg(
 
 st.dataframe(q1, use_container_width="stretch")
 
-fig1 = px.box(
-    pm25,
-    x="Geo Type Name",
-    y="Data Value",
-    title="PM2.5 Values by Geographic Type"
+
+
+q1_chart = q1.reset_index().sort_values(
+    "mean", ascending=True
 )
 
+fig1 = px.bar(
+    q1_chart,
+    x="mean",
+    y="Geo Type Name",
+    orientation="h",
+    text="mean",
+    hover_data={
+        "count": True,
+        "median": ":.2f",
+        "min": ":.2f",
+        "max": ":.2f"
+    },
+    labels={
+        "mean": "Average PM2.5",
+        "Geo Type Name": "Geographic Type",
+        "count": "Number of Records",
+        "median": "Median PM2.5",
+        "min": "Minimum",
+        "max": "Maximum"
+    },
+    title="Average PM2.5 by Geographic Type"
+)
+
+fig1.update_traces(
+    texttemplate="%{x:.2f}",
+    textposition="outside",
+    cliponaxis=False
+)
+
+fig1.update_layout(
+    height=380,
+    xaxis_title="Average PM2.5 Value",
+    yaxis_title="Geographic Type",
+    margin=dict(l=20, r=50, t=70, b=30)
+)
+
+fig1.update_xaxes(rangemode="tozero")
+
 st.plotly_chart(fig1, use_container_width=True)
+
+st.caption(
+    "Bars compare average PM2.5 values. "
+    "Use the table above to review the median, range, and record count."
+)
 
 
 # Question 2
@@ -92,22 +135,66 @@ st.plotly_chart(fig2, use_container_width=True)
 # Question 3
 # --------------------------------------------------
 
-st.header("Question 3: How do PM2.5 values vary by period type?")
-
+st.header(
+    "Question 3: How does average PM2.5 differ by period type?"
+)
 q3 = pm25.groupby("Period Type")["Data Value"].agg(
     ["count", "mean", "median", "min", "max"]
 ).round(2)
 
 st.dataframe(q3, use_container_width=True)
 
-fig3 = px.box(
-    pm25,
-    x="Period Type",
-    y="Data Value",
-    title="PM2.5 Values by Period Type"
+
+
+q3_chart = q3.reset_index().sort_values(
+    "mean", ascending=True
 )
 
+fig3 = px.bar(
+    q3_chart,
+    x="mean",
+    y="Period Type",
+    orientation="h",
+    text="mean",
+    hover_data={
+        "count": True,
+        "median": ":.2f",
+        "min": ":.2f",
+        "max": ":.2f"
+    },
+    labels={
+        "mean": "Average PM2.5",
+        "Period Type": "Period Type",
+        "count": "Number of Records",
+        "median": "Median PM2.5",
+        "min": "Minimum",
+        "max": "Maximum"
+    },
+    title="Average PM2.5 by Period Type"
+)
+
+fig3.update_traces(
+    texttemplate="%{x:.2f}",
+    textposition="outside",
+    cliponaxis=False
+)
+
+fig3.update_layout(
+    height=330,
+    xaxis_title="Average PM2.5 Value",
+    yaxis_title="Period Type",
+    margin=dict(l=20, r=50, t=70, b=30)
+)
+
+fig3.update_xaxes(rangemode="tozero")
+
 st.plotly_chart(fig3, use_container_width=True)
+
+st.caption(
+    "The chart compares average PM2.5 values for each period type. "
+    "The table above contains additional descriptive statistics."
+)
+
 
 
 # 
